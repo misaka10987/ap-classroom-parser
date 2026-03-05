@@ -94,7 +94,7 @@ export const App = () => {
           错误：<code>{error()}</code>
         </p>
         <p>{output().filter((x) => x != null).length} 个答案被解析</p>
-        <table hidden={output().length == 0} class="border-spacing-2">
+        <table hidden={output().length == 0} class="border-spacing-x-4">
           <thead>
             <tr>
               <th>#</th>
