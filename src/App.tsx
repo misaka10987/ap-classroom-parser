@@ -80,7 +80,11 @@ export const App = () => {
           onclick={() => {
             try {
               const text = input()
-              if (text == '') return
+              if (text == '') {
+                setOutput([])
+                setError(null)
+                return
+              }
               setOutput(parse(text))
             } catch (e) {
               setOutput([])
