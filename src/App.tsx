@@ -202,6 +202,10 @@ export const App = () => {
           "activity" 找到对应请求。
           打开请求，以文本格式复制响应体，粘帖于此处，即可解析答案
         </p>
+        <details>
+          <summary>问题：Firefox 截断超过 1MiB 的响应体</summary>
+          <p>使用 <code>curl</code> 重发请求并保存到 JSON 文件</p>
+        </details>
       </section>
     </main>
   )
