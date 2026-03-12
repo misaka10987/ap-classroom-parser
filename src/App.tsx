@@ -42,6 +42,10 @@ export const App = () => {
   const [error, setError] = createSignal<string | null>(null)
   const [input, setInput] = createSignal('')
 
+  const [uploadJson, setUploadJson] = createSignal('')
+  const [uploadHar, setUploadHar] = createSignal('')
+  const [uploadHarError, setUploadHarError] = createSignal<string | null>(null)
+
   const parse = () => {
     try {
       const text = input()
@@ -85,10 +89,79 @@ export const App = () => {
             />
           </span>
           <span>
-            <button onclick={() => setInput('')}>清空</button>
+            <button
+              onclick={() => {
+                setInput('')
+                setUploadJson('')
+                setUploadHar('')
+                setUploadHarError(null)
+              }}
+            >
+              清空
+            </button>
           </span>
         </p>
         <p>{input().length} 字符</p>
+
+        <p>或：</p>
+        <ul>
+          <li>
+            <p class="align-middle space-x-2">
+              <span>上传 JSON 文件</span>
+              <span>
+                <input
+                  type="file"
+                  value={uploadJson()}
+                  onInput={async (e) => {
+                    // walkaround: solidjs interop w/ dom
+                    // while setting value of file input is prohibited by browser, solidjs needs to update the signal
+                    try {
+                      setUploadJson(e.currentTarget.value)
+                    } catch (_) {}
+                    const file = e.currentTarget.files?.[0]
+                    const content = await file?.text()
+                    if (content) setInput(content)
+                  }}
+                />
+              </span>
+            </p>
+          </li>
+
+          <li>
+            <p class="align-middle space-x-2">
+              <span>
+                上传 <a href="https://zh.wikipedia.org/wiki/.har">HAR</a> 文件
+              </span>
+              <span>
+                <input
+                  type="file"
+                  value={uploadHar()}
+                  onInput={async (e) => {
+                    // walkaround: solidjs interop w/ dom
+                    // while setting value of file input is prohibited by browser, solidjs needs to update the signal
+                    try {
+                      setUploadHar(e.currentTarget.value)
+                    } catch (_) {}
+                    const file = e.currentTarget.files?.[0]
+                    const content = await file?.text()
+                    try {
+                      const har = JSON.parse(content || '')
+                      const res = har.log.entries[0].response.content.text
+                      setInput(res)
+                      setUploadHarError(null)
+                    } catch (e) {
+                      setUploadHarError((e as Error).message)
+                      return
+                    }
+                  }}
+                />
+              </span>
+            </p>
+            <p hidden={uploadHarError() == null} class="text-red-500">
+              错误：<code>{uploadHarError()}</code>
+            </p>
+          </li>
+        </ul>
       </section>
       <section>
         <h2>解析答案</h2>
