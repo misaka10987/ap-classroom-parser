@@ -86,6 +86,7 @@ export const App = () => {
                 return
               }
               setOutput(parse(text))
+              setError(null)
             } catch (e) {
               setOutput([])
               setError((e as Error).message)
