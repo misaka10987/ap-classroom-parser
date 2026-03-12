@@ -118,10 +118,18 @@ export const App = () => {
       <section>
         <h2>使用说明</h2>
         <p>
-          请提供 AP Classroom 答题网页上 URL 中带有 <code>activity</code>{' '}
+          请打开 AP Classroom 答题网页， 截获 URL 带 <code>activity</code>{' '}
           字样请求的响应体
         </p>
-        <p>你可以打开浏览器开发者工具，在「网络」一栏中搜索这个请求</p>
+        <p>
+          为此，你可以先打开{' '}
+          <a href="https://zh.wikipedia.org/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7">
+            浏览器开发者工具
+          </a>{' '}
+          ，然后点击进入答题页面，并切至开发者工具的「网络」一栏，在 URL 中搜索
+          "activity" 找到对应请求。
+          打开请求，以文本格式复制响应体，粘帖于此处，即可解析答案
+        </p>
       </section>
     </main>
   )
