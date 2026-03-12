@@ -21,7 +21,7 @@ interface Data {
   }
 }
 
-const parse = (input: string): (string | null)[] => {
+const resolve = (input: string): (string | null)[] => {
   // TODO: use typia runtime validation
   const data: Data = JSON.parse(input)
   const answer = data.data.apiActivity.items
@@ -41,6 +41,22 @@ export const App = () => {
   const [output, setOutput] = createSignal<(string | null)[]>([])
   const [error, setError] = createSignal<string | null>(null)
   const [input, setInput] = createSignal('')
+
+  const parse = () => {
+    try {
+      const text = input()
+      if (text == '') {
+        setOutput([])
+        setError(null)
+        return
+      }
+      setOutput(resolve(text))
+      setError(null)
+    } catch (e) {
+      setOutput([])
+      setError((e as Error).message)
+    }
+  }
 
   return (
     <main class="m-4">
@@ -76,25 +92,7 @@ export const App = () => {
       </section>
       <section>
         <h2>解析答案</h2>
-        <button
-          onclick={() => {
-            try {
-              const text = input()
-              if (text == '') {
-                setOutput([])
-                setError(null)
-                return
-              }
-              setOutput(parse(text))
-              setError(null)
-            } catch (e) {
-              setOutput([])
-              setError((e as Error).message)
-            }
-          }}
-        >
-          计算
-        </button>
+        <button onclick={parse}>计算</button>
         <p hidden={error() == null} class="text-red-500">
           错误：<code>{error()}</code>
         </p>
