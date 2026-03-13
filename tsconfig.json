@@ -4,7 +4,7 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "target": "ESNext",
-
+    
     // Modules
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -12,9 +12,18 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
-
+    
     // Type Checking & Safety
     "strict": true,
-    "types": ["vite/client"]
+    "types": [
+      "vite/client"
+    ],
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ],
+    "skipLibCheck": true,
+    "strictNullChecks": true
   }
 }

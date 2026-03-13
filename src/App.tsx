@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js'
+import { json } from 'typia'
 
 interface Data {
   data: {
@@ -23,7 +24,7 @@ interface Data {
 
 const resolve = (input: string): (string | null)[] => {
   // TODO: use typia runtime validation
-  const data: Data = JSON.parse(input)
+  const data = json.assertParse<Data>(input)
   const answer = data.data.apiActivity.items
     .map((item) => item.questions[0])
     .map((question) => {
@@ -204,7 +205,9 @@ export const App = () => {
         </p>
         <details>
           <summary>问题：Firefox 截断超过 1MiB 的响应体</summary>
-          <p>使用 <code>curl</code> 重发请求并保存到 JSON 文件</p>
+          <p>
+            使用 <code>curl</code> 重发请求并保存到 JSON 文件
+          </p>
         </details>
       </section>
     </main>
