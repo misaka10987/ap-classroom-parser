@@ -22,6 +22,20 @@ interface Data {
   }
 }
 
+interface Har {
+  log: {
+    entries: [
+      {
+        response: {
+          content: {
+            text: string
+          }
+        }
+      },
+    ]
+  }
+}
+
 const resolve = (input: string): (string | null)[] => {
   // TODO: use typia runtime validation
   const data = json.assertParse<Data>(input)
@@ -146,7 +160,7 @@ export const App = () => {
                     const file = e.currentTarget.files?.[0]
                     const content = await file?.text()
                     try {
-                      const har = JSON.parse(content || '')
+                      const har = json.assertParse<Har>(content || '')
                       const res = har.log.entries[0].response.content.text
                       setInput(res)
                       setUploadHarError(null)
