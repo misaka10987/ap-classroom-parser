@@ -138,7 +138,7 @@ export const App = () => {
               name="type"
               onclick={() => setInputType('har')}
             />
-            <a href="https://zh.wikipedia.org/wiki/.har">HAR</a>
+            <a href="https://zh.wikipedia.org/wiki/.har">HAR</a>（单个请求）
           </label>
         </p>
         <p class="align-middle space-x-2">
@@ -204,10 +204,19 @@ export const App = () => {
           打开请求，以文本格式复制响应体，粘帖于此处，即可解析答案
         </p>
         <details>
+          <summary>找不到请求</summary>
+          <section class="ml-4">
+            <p>刷新页面</p>
+            <p>如果仍无法找到，试着先打开控制台，再点击进入答题页面</p>
+          </section>
+        </details>
+        <details>
           <summary>问题：Firefox 截断超过 1MiB 的响应体</summary>
-          <p>
-            使用 <code>curl</code> 重发请求并保存到 JSON 文件
-          </p>
+          <section class="ml-4">
+            <p>
+              使用 <code>curl</code> 重发请求并保存到 JSON 文件
+            </p>
+          </section>
         </details>
       </section>
     </main>
