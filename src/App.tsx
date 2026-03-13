@@ -219,6 +219,32 @@ export const App = () => {
           </section>
         </details>
       </section>
+      <section>
+        <h2>关于</h2>
+        <p>
+          本站由 <a href="mailto:misaka10987@outlook.com">misaka10987</a>{' '}
+          维护，遵循 MIT 许可证开源。当前代码托管于{' '}
+          <a href="https://github.com/misaka10987/ap-classroom-parser">
+            GitHub
+          </a>{' '}
+          .
+        </p>
+        <details>
+          <summary>免责条款</summary>
+          <section class="ml-4">
+            <p>
+              THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+              EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+              MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+              NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+              HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+              WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+              OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+              DEALINGS IN THE SOFTWARE.
+            </p>
+          </section>
+        </details>
+      </section>
     </main>
   )
 }
