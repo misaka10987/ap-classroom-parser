@@ -12,7 +12,7 @@ interface Data {
                 value: [string]
               }
             }
-            options: {
+            options?: {
               value: string
             }[]
           },
@@ -43,8 +43,9 @@ const resolve = (input: string): (string | null)[] => {
     .map((item) => item.questions[0])
     .map((question) => {
       const key = question.validation?.valid_response.value[0]
-      if (!key) return null
-      const key_idx = question.options.findIndex((opt) => opt.value == key)
+      if (key === undefined) return null
+      const key_idx = question.options?.findIndex((opt) => opt.value == key)
+      if (key_idx === undefined) return null
       if (key_idx >= 26) return null
       // 'A' = 65
       return String.fromCharCode(65 + key_idx)
